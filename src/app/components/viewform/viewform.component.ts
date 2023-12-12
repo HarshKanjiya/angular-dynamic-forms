@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ButtonModule } from 'primeng/button';
+import { HttpService } from '../../services/http-service.service';
 
 @Component({
   selector: 'app-viewform',
@@ -19,11 +20,14 @@ export class ViewformComponent {
 
   selectedOptions: any = []
 
+  base64Image: string | null = null;
+  base64Images: any = {}
 
 
 
 
-  constructor(private store: Store<any>) {
+
+  constructor(private store: Store<any>, private httpService: HttpService) {
     this.store.select("form").subscribe((res: any) => {
       this.JsonForm = res.JsonData
       // console.log('res :>> ', this.JsonForm)
@@ -89,21 +93,7 @@ export class ViewformComponent {
 
 
 
-  submitForm(data: any) {
-    console.log('data :>> ', data);
 
-    for (let key in this.formData) {
-      if (this.formData.hasOwnProperty(key)) {
-
-        if (key.toString().split(" ")[0] !== "multi") {
-
-          this.formData[key] = data[key]
-        }
-      }
-    }
-    console.log('object :>> ', this.formData);
-
-  }
 
 
 
@@ -114,13 +104,46 @@ export class ViewformComponent {
 
   //   return this.http.post('/api/v1/image-upload', formData);
   // }
-  onSubmit() {
-    // @ts-ignore
-    if (this.form.valid) {
-      // @ts-ignore
-      const formData = this.form.value;
-      console.log('Form Data:', formData);
-      // Submit the form data or perform any other actions here
+
+  handleImageUpload(event: any, elementId: any): void {
+    const input = event.target;
+    const file = input.files && input.files.length > 0 ? input.files[0] : null;
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        this.base64Image = reader.result as string
+
+        this.base64Images[`file ${elementId}`] = reader.result as string
+
+      };
+
+      reader.readAsDataURL(file);
     }
+  }
+
+  submitForm(data: any) {
+
+    for (let key in this.formData) {
+      if (this.formData.hasOwnProperty(key)) {
+
+        if (key.toString().split(" ")[0] !== "multi") {
+
+          this.formData[key] = data[key]
+        }
+      }
+    }
+
+    for (let key in this.base64Images) {
+      if (this.formData.hasOwnProperty(key)) {
+        this.formData[key] = this.base64Images[key]
+      }
+    }
+
+    this.httpService.postData("responses", this.formData).subscribe((res) => {
+      console.log('res :>> ', res);
+    })
+
   }
 }
