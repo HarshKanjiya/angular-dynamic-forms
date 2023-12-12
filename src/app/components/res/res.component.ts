@@ -16,15 +16,24 @@ export class ResComponent {
 
   rawJson: any;
 
+  filtered: any
 
   constructor(private store: Store<any>, private httpService: HttpService) {
 
 
-    this.httpService.getData("responses").subscribe((res: any) => {
-      console.log('res :>> ', res);
+    this.httpService.getData("responses").subscribe((rawRes: any) => {
+      console.log('res :>> ', rawRes);
 
-      this.rawJson = res
-      this.store.dispatch(addResponseAction({ data: res }))
+      rawRes.map((res: any) => {
+        for (let key in res) {
+          if (res.hasOwnProperty(key)) {
+            console.log('key :>> ', key);
+          }
+        }
+      })
+
+      this.rawJson = rawRes
+      this.store.dispatch(addResponseAction({ data: rawRes }))
 
     })
 
