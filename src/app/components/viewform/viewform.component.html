@@ -1,0 +1,232 @@
+<form #user="ngForm" name="form" (ngSubmit)="submitForm(user.value)">
+  <div
+    class="bg-white flex flex-col gap-3 p-4 rounded shadow-lg mt-12 min-w-[500px]"
+  >
+    <div class="flex justify-between items-center">
+      <div>
+        <h2 class="text-xl font-bold">View Mode</h2>
+      </div>
+      <div class="flex flex-col items-end">
+        <a class="flex gap-2 items-center hover:underline" [routerLink]="['']"
+          ><p>edit form</p>
+          <svg
+            class="h-6 w-6 p-0.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M7 17L17 7M17 7H8M17 7V16"
+                stroke="#000000"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g></svg
+        ></a>
+
+        <!--  -->
+        <a
+          class="flex gap-2 items-center hover:underline"
+          [routerLink]="['/res']"
+          ><p>view Response</p>
+          <svg
+            class="h-6 w-6 p-0.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M7 17L17 7M17 7H8M17 7V16"
+                stroke="#000000"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g></svg
+        ></a>
+      </div>
+    </div>
+
+    <hr />
+
+    <!--  -->
+    <!--  -->
+    <!--  -->
+
+    <div class="flex flex-col gap-3 w-full">
+      @if( JsonForm.length === 0 ){
+      <div class="py-6 flex items-center justify-center">
+        No Fields to Show!
+      </div>
+      } @else {
+      <!--  -->
+      @for (item of JsonForm; track $index) {
+      <!--  -->
+      @switch (item.category) {
+
+      <!--  -->
+      @case("Text"){
+      <div class="relative py-2">
+        <label class="text-xs absolute -top-1.5 left-2 bg-white px-3">
+          {{ item.label }}
+        </label>
+        <input
+          ngModel
+          name="input {{ item.elementId }}"
+          type="{{ item.type }}"
+          class="px-2.5 pl-4 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          placeholder="{{ item.placeholder }}"
+          required="{{ item.required }}"
+        />
+      </div>
+      }
+
+      <!--  -->
+      @case("Multiple Choice"){
+      <div class="relative py-2 mt-3 pt-1.5">
+        <label class="text-md absolute -top-3 left-0 bg-white px-1">
+          {{ item.label }}
+        </label>
+        @for (option of item.options; track $index) {
+        <div class="flex items-center py-1 pl-1">
+          <input
+            type="checkbox"
+            ngModel
+            #iddd
+            (change)="
+              optionChangeHelper(item.elementId, option.optionId, iddd.checked)
+            "
+            value="{{ option.value }}"
+            name="multi {{ item.elementId }}"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+          />
+          <label for="default-checkbox" class="ms-2 text-slate-800"
+            >{{ option.text }}
+          </label>
+          <!-- <label for="default-checkbox" class="ms-2 text-slate-800">
+            <input
+              type="checkbox"
+              ngModel
+              value="{{ option.value }}"
+              name="multi {{ item.elementId }}"
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+            />
+            {{ option.text }}
+          </label> -->
+        </div>
+        }
+
+        <!-- <input ngModel type="checkbox" value="one" name="qqq" />
+        <input ngModel type="checkbox" value="two" name="qqq" />
+        <input ngModel type="checkbox" value="three" name="qqq" /> -->
+      </div>
+      }
+
+      <!--  -->
+      @case("Radio Button"){
+      <div class="relative py-2 mt-3">
+        <label class="text-md absolute -top-3 left-0 bg-white px-1">
+          {{ item.label }}
+        </label>
+        @for (option of item.options; track $index) {
+        <div class="flex items-center py-1 pl-1 pt-1.5">
+          <input
+            type="radio"
+            ngModel
+            name="radio button {{ item.elementId }}"
+            value="{{ option.text }}"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+          />
+          <label for="default-checkbox" class="ms-2 text-slate-800"
+            >{{ option.text }}
+          </label>
+        </div>
+        }
+      </div>
+      }
+
+      <!--  -->
+      @case("Textarea"){
+      <div class="relative py-2">
+        <label class="text-xs absolute -top-1.5 left-2 bg-white px-3">
+          {{ item.label }}
+        </label>
+        <textarea
+          rows="5"
+          ngModel
+          name="textarea {{ item.elementId }}"
+          class="px-2.5 pl-4 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          placeholder="{{ item.placeholder }}"
+          required="{{ item.required }}"
+        ></textarea>
+      </div>
+      }
+
+      <!--  -->
+
+      @case("date"){
+      <div class="relative py-2">
+        <label class="text-xs absolute -top-1.5 left-2 bg-white px-3">
+          {{ item.label }}
+        </label>
+        <input
+          ngModel
+          name="date {{ item.elementId }}"
+          type="date"
+          class="px-2.5 pl-4 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          required="{{ item.required }}"
+          min="{{ item.minDate }}"
+          max="{{ item.maxDate }}"
+        />
+      </div>
+      }
+
+      <!--  -->
+
+      @case("file upload"){
+      <div class="relative py-2">
+        <label class="text-xs absolute -top-1.5 left-2 bg-white px-3">
+          {{ item.label }}
+        </label>
+        <input
+          ngModel
+          name="file {{ item.elementId }}"
+          type="file"
+          class="px-2.5 pl-4 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          placeholder="{{ item.placeholder }}"
+          required="{{ item.required }}"
+        />
+      </div>
+      }
+
+      <!--  -->
+
+      } } }
+    </div>
+
+    <div class="flex items-center justify-end">
+      <button
+        pButton
+        pRipple
+        class="px-3 py-2 border flex items-center border-slate-300 hover:bg-blue-500 hover:text-white group"
+      >
+        <p>Submit Form</p>
+      </button>
+    </div>
+  </div>
+</form>

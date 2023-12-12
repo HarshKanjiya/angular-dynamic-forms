@@ -1,0 +1,81 @@
+{
+  "responses": [],
+  "forms": [
+    {
+      "data": [
+        {
+          "elementId": 0,
+          "label": "password",
+          "placeholder": "xyz",
+          "required": "true",
+          "category": "Text",
+          "type": "password"
+        },
+        {
+          "options": [
+            {
+              "optionId": 100,
+              "optionValue": "a",
+              "text": "opt a"
+            },
+            {
+              "optionId": 101,
+              "optionValue": "b",
+              "text": "opt b"
+            },
+            {
+              "optionId": 102,
+              "optionValue": "c",
+              "text": "opt c"
+            }
+          ],
+          "elementId": 1,
+          "label": "multiple choice",
+          "required": "true",
+          "category": "Multiple Choice"
+        },
+        {
+          "options": [
+            {
+              "optionId": 103,
+              "optionValue": "m",
+              "text": "male"
+            },
+            {
+              "optionId": 104,
+              "optionValue": "f",
+              "text": "female"
+            }
+          ],
+          "elementId": 2,
+          "label": "gender",
+          "required": "false",
+          "category": "Radio Button"
+        },
+        {
+          "elementId": 3,
+          "label": "text area",
+          "placeholder": "texttttttttttttttttttt",
+          "required": "false",
+          "category": "Textarea"
+        },
+        {
+          "elementId": 4,
+          "label": "birth date",
+          "required": "false",
+          "minDate": "2023-12-12",
+          "maxDate": "2023-12-30",
+          "category": "date"
+        },
+        {
+          "elementId": 5,
+          "label": "image",
+          "required": "false",
+          "accept": "image/png",
+          "category": "file upload"
+        }
+      ],
+      "id": 1
+    }
+  ]
+}
