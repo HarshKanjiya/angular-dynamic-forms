@@ -1,13 +1,73 @@
 <div class="bg-white p-4 rounded shadow-lg mt-12 min-w-[500px]">
-  <div class="flex justify-between py-2 px-3 pb-6 items-center">
+  <!-- <div class="flex justify-between py-2 px-3 pb-6 items-center">
     <h2 class="text-lg font-bold">Create Form</h2>
 
     <a [routerLink]="['/view']" routerLinkActive="router-link-active"
       >View Form</a
     >
+  </div> -->
+
+  <div class="flex justify-between items-center">
+    <div>
+      <h2 class="text-xl font-bold">Edit Form</h2>
+    </div>
+    <div class="flex flex-col items-end">
+      <a class="flex gap-2 items-center hover:underline" [routerLink]="['view']"
+        ><p>View form</p>
+        <svg
+          class="h-6 w-6 p-0.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M7 17L17 7M17 7H8M17 7V16"
+              stroke="#000000"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </g></svg
+      ></a>
+
+      <!--  -->
+      <a class="flex gap-2 items-center hover:underline" [routerLink]="['/res']"
+        ><p>view Responses</p>
+        <svg
+          class="h-6 w-6 p-0.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M7 17L17 7M17 7H8M17 7V16"
+              stroke="#000000"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </g></svg
+      ></a>
+    </div>
   </div>
 
-  <div class="relative flex justify-between px-3 items-center">
+  <hr class="mt-6" />
+
+  <div class="relative mt-6 flex justify-between px-3 items-center">
     <label for="dropdown" class="absolute text-xs -top-2 left-3"
       >Select an option:</label
     >
