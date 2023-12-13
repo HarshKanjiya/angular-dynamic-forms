@@ -1,0 +1,88 @@
+@if(data){
+<div class="py-3 flex flex-col gap-3">
+  <div>response id: {{ data?.id }}</div>
+
+  <!--  -->
+
+  @if( data.text.length > 0 ){
+
+  <div>
+    <label>text response:</label>
+    @for (item of data.text; track $index) {
+    <p>{{ $index + 1 }} : {{ item }}</p>
+    }
+  </div>
+  }
+
+  <!--  -->
+
+  @if( data.textarea.length > 0 ){
+
+  <div>
+    <label>textarea response:</label>
+    @for (item of data.textarea; track $index) {
+    <p>{{ $index + 1 }} : {{ item }}</p>
+    }
+  </div>
+  }
+
+  <!--  -->
+
+  @if( data.radio.length > 0 ){
+
+  <div>
+    <label>radio response:</label>
+    @for (item of data.radio; track $index) {
+    <p>{{ $index + 1 }} : {{ item }}</p>
+    }
+  </div>
+  }
+
+  <!--  -->
+
+  @if( data.checkbox.length > 0 ){
+
+  <div>
+    <label>checkbox response:</label>
+    @for (item of data.checkbox; track $index) {
+    <p>{{ $index + 1 }} : {{ item }}</p>
+    }
+  </div>
+  }
+
+  <!--  -->
+
+  @if( data.date.length > 0 ){
+
+  <div>
+    <label>date response:</label>
+    @for (item of data.date; track $index) {
+    <p>{{ $index + 1 }} : {{ item }}</p>
+    }
+  </div>
+  }
+
+  <!--  -->
+
+  @if( data.file.length > 0 ){
+
+  <div>
+    <label>file response:</label>
+    @for (item of data.file; track $index) {
+    <div>{{ $index + 1 }} : <img src="{{ item }}" class="h-28 w-28" /></div>
+    }
+  </div>
+  }
+
+  <!--  -->
+  @if( data.optional.length > 0 ){
+  <div>
+    <label>Optional response:</label>
+    @for (item of data.optional; track $index) {
+    <p>{{ $index + 1 }} : {{ item }}</p>
+    }
+  </div>
+  }
+</div>
+
+}

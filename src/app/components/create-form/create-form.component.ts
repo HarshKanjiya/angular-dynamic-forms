@@ -8,14 +8,13 @@ import { ButtonModule } from 'primeng/button';
 import { Overlay } from 'primeng/overlay';
 import { addFormAction } from '../../reducers/formReducer';
 import { HttpService } from '../../services/http-service.service';
-
+import { moveItemInArray, CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, CdkDropListGroup } from "@angular/cdk/drag-drop"
 
 @Component({
   selector: 'app-create-form',
   standalone: true,
-  imports: [ButtonModule, FormsModule, RouterLink, HttpClientModule],
+  imports: [ButtonModule, CdkDrag, CdkDragHandle, CdkDropList, CdkDropListGroup, FormsModule, RouterLink, HttpClientModule],
   templateUrl: './create-form.component.html',
-  styleUrl: './create-form.component.css',
   animations: [Overlay]
 
 })
@@ -30,11 +29,11 @@ export class CreateFormComponent {
 
   jsonData: any[] = []
 
-  availableInputs = ["Text", "Multiple Choice", "Radio Button", "Textarea", "date", "file upload"]
-  selectedInput: string = "Multiple Choice"
+  availableInputs = ["Text", "Multiple Choice", "Radio Button", "Textarea", "date", "file upload", "optional"]
+  selectedInput: string = "Text"
 
   temp: any = {};
-  counter: number = 0
+  counter: number = 20
   OptionsCounter: number = 100
 
 
@@ -77,7 +76,7 @@ export class CreateFormComponent {
       }
       if (this.selectedInput === "Text") _temp["type"] = this.selectedTypeOfInput
       console.log('_temp :>> ', _temp);
-      this.jsonData.push(_temp)
+      this.jsonData = [...this.jsonData, _temp]
 
       this.labelString = ""
       this.placeholderString = ""
@@ -129,7 +128,7 @@ export class CreateFormComponent {
         "required": this.required,
         "category": this.selectedInput
       }
-      this.jsonData.push(_temp)
+      this.jsonData = [...this.jsonData, _temp]
       console.log('_temp :>> ', _temp);
 
       // console.log(this.jsonData);
@@ -162,7 +161,7 @@ export class CreateFormComponent {
         "category": this.selectedInput
       }
       console.log('_temp :>> ', _temp);
-      this.jsonData.push(_temp)
+      this.jsonData = [...this.jsonData, _temp]
 
       this.labelString = ""
       this.placeholderString = ""
@@ -187,7 +186,32 @@ export class CreateFormComponent {
         "category": this.selectedInput
       }
       console.log('_temp :>> ', _temp);
-      this.jsonData.push(_temp)
+      this.jsonData = [...this.jsonData, _temp]
+
+      this.labelString = ""
+      this.placeholderString = ""
+      this.selectedTypeOfInput = "text"
+      this.required = false
+
+      this.counter += 1
+    } else {
+      new Toast("Please fill all the Details 🙏", { position: "top", timeout: 1300, theme: "light" })
+    }
+  }
+
+  addOptionalBody() {
+    if (this.labelString.trim().length > 0 && this.placeholderString.trim().length > 0) {
+
+      let _temp: any = {
+        "elementId": this.counter,
+        "label": this.labelString,
+        "placeholder": this.placeholderString,
+        "required": false,
+        "category": this.selectedInput
+      }
+      console.log('_temp :>> ', _temp, this.jsonData);
+
+      this.jsonData = [...this.jsonData, _temp]
 
       this.labelString = ""
       this.placeholderString = ""
@@ -214,9 +238,24 @@ export class CreateFormComponent {
     this.required = false
   }
 
+
+  drop(event: CdkDragDrop<any[]>) {
+    console.log('drop :>> ', event);
+    // moveItemInArray(this.jsonData, event.previousIndex, event.currentIndex)
+
+
+    let _temp = [...this.jsonData]
+
+    const movedItem = _temp.splice(event.previousIndex, 1)
+    _temp.splice(event.currentIndex, 0, movedItem[0]);
+
+    console.log('_temp :>> ', _temp);
+    this.jsonData = _temp
+  }
+
+
+
   saveForm() {
-
-
     this.httpService.postData("forms", { "data": this.jsonData }).subscribe(res => {
       console.log('res :>> ', res);
     })

@@ -216,6 +216,40 @@
       }
 
       <!--  -->
+      @case("optional"){
+      <div class="flex py-2 flex-col gap-3">
+        <div class="">
+          <input
+            type="checkbox"
+            #optional
+            (change)="
+              optionalDataBooleansChangeHandler(
+                item.elementId,
+                optional.checked
+              )
+            "
+          />
+          i have {{ item.label }} field
+        </div>
+        @if ( optionalDataBooleans[ item.elementId] ) {
+        <div class="relative py-2">
+          <label class="text-xs absolute -top-1.5 left-2 bg-white px-3">
+            {{ item.label }}
+          </label>
+          <input
+            ngModel
+            name="optional {{ item.elementId }}"
+            type="text"
+            class="px-2.5 pl-4 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+            placeholder="{{ item.placeholder }}"
+            required="{{ item.required }}"
+          />
+        </div>
+        }
+      </div>
+      }
+
+      <!--  -->
 
       } } }
     </div>

@@ -13,9 +13,12 @@ import { addFormAction } from './reducers/formReducer';
 })
 export class AppComponent {
 
-  constructor(private store: Store<any>, private httpService: HttpService) {
-    httpService.getData("forms").subscribe((res: any) => {
-      store.dispatch(addFormAction({ JsonData: res[0].data }))
+  constructor(private store: Store<any>, private http: HttpService) {
+    http.getData("forms").subscribe((res: any) => {
+
+      let dataObj = res.reverse()[0]
+
+      store.dispatch(addFormAction({ JsonData: dataObj?.data ?? [] }))
     })
   }
 }

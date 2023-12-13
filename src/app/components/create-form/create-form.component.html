@@ -839,6 +839,100 @@
         </button>
       </div>
     </div>
+    } @case ("optional") {
+    <div>
+      <div class="flex flex-col gap-3 pt-3">
+        <input
+          [(ngModel)]="labelString"
+          type="text"
+          id="last_name"
+          class="px-2.5 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          placeholder="Label"
+          required
+        />
+        <input
+          [(ngModel)]="placeholderString"
+          type="text"
+          id="last_name"
+          class="px-2.5 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          placeholder="Placeholder"
+          required
+        />
+
+        <!-- <div class="flex gap-3 items-center justify-between">
+          <p>Required</p>
+          <div class="flex gap-3 items-center">
+            <div class="flex items-center">
+              <input
+                [(ngModel)]="required"
+                id="default-radio-1"
+                type="radio"
+                value="{{ true }}"
+                name="default-radio"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+              />
+              <label for="default-radio-1" class="ms-2 text-sm text-gray-900"
+                >True</label
+              >
+            </div>
+            <div class="flex items-center">
+              <input
+                [(ngModel)]="required"
+                checked
+                id="default-radio-2"
+                type="radio"
+                [defaultChecked]
+                [defaultValue]
+                value="{{ false }}"
+                name="default-radio"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+              />
+              <label for="default-radio-2" class="ms-2 text-sm text-gray-900"
+                >False</label
+              >
+            </div>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="mt-5 flex justify-end">
+        <button
+          (click)="addOptionalBody()"
+          pButton
+          pRipple
+          class="px-3 py-2 border flex gap-2 items-center border-slate-300 hover:bg-blue-500 hover:text-white group"
+        >
+          <div class="h-6 w-6">
+            <svg
+              class="group-hover:stroke-white stroke-black"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>
+                <path
+                  d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <p>Add Field</p>
+        </button>
+      </div>
+    </div>
     } }
   </div>
 </div>
@@ -851,106 +945,123 @@
     <div class="flex w-full justify-center items-center py-6">
       <h2>No Fields to Show!</h2>
     </div>
-    }@else{ @for (item of jsonData; track $index) {
-    <div
-      class="flex gap-2 px-3 h-[52px] items-center py-2 w-full justify-between border border-slate-300 rounded"
-    >
-      <div class="flex gap-4 items-center">
-        <p>{{ $index + 1 }}</p>
-        <div class="relative flex flex-col items-start justify-center">
-          <p>{{ item.category }}</p>
-          <p class="text-xs text-slate-400">{{ item.label }}</p>
-        </div>
-      </div>
-      <div class="flex gap-2">
-        <button
-          class="h-8 w-6 border border-slate-200 rounded-md hover:shadow-lg"
+    }@else{
+
+    <!--  -->
+
+    <div cdkDropListGroup>
+      <div
+        cdkDropList
+        [cdkDropListData]="jsonData"
+        (cdkDropListDropped)="drop($event)"
+        class="flex flex-col gap-2"
+      >
+        @for (item of jsonData; track $index) {
+        <div
+          cdkDrag
+          class="flex gap-2 px-3 h-[52px] items-center py-2 w-full justify-between border border-slate-300 rounded"
         >
-          <svg
-            class="stroke-slate-600"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              <g id="Interface / Drag_Vertical">
-                <g id="Vector">
+          <div class="flex gap-4 items-center">
+            <p>{{ $index + 1 }}</p>
+            <div class="relative flex flex-col items-start justify-center">
+              <p>{{ item.category }}</p>
+              <p class="text-xs text-slate-400">{{ item.label }}</p>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button
+              cdkDragHandle
+              class="h-8 w-6 border border-slate-200 group hover:bg-blue-500 rounded overflow-hidden transition-all duration-200"
+            >
+              <svg
+                class="stroke-slate-600 group-hover:stroke-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g id="Interface / Drag_Vertical">
+                    <g id="Vector">
+                      <path
+                        d="M14 18C14 18.5523 14.4477 19 15 19C15.5523 19 16 18.5523 16 18C16 17.4477 15.5523 17 15 17C14.4477 17 14 17.4477 14 18Z"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M8 18C8 18.5523 8.44772 19 9 19C9.55228 19 10 18.5523 10 18C10 17.4477 9.55228 17 9 17C8.44772 17 8 17.4477 8 18Z"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M14 12C14 12.5523 14.4477 13 15 13C15.5523 13 16 12.5523 16 12C16 11.4477 15.5523 11 15 11C14.4477 11 14 11.4477 14 12Z"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M8 12C8 12.5523 8.44772 13 9 13C9.55228 13 10 12.5523 10 12C10 11.4477 9.55228 11 9 11C8.44772 11 8 11.4477 8 12Z"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M14 6C14 6.55228 14.4477 7 15 7C15.5523 7 16 6.55228 16 6C16 5.44772 15.5523 5 15 5C14.4477 5 14 5.44772 14 6Z"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M8 6C8 6.55228 8.44772 7 9 7C9.55228 7 10 6.55228 10 6C10 5.44772 9.55228 5 9 5C8.44772 5 8 5.44772 8 6Z"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </button>
+            <button
+              (click)="removeField(item.elementId)"
+              class="h-8 w-8 border border-slate-200 group hover:bg-red-500 transition-all duration-200 rounded overflow-hidden hover:shadow-lg"
+            >
+              <svg
+                class="stroke-slate-700 px-1 group-hover:stroke-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
                   <path
-                    d="M14 18C14 18.5523 14.4477 19 15 19C15.5523 19 16 18.5523 16 18C16 17.4477 15.5523 17 15 17C14.4477 17 14 17.4477 14 18Z"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                  <path
-                    d="M8 18C8 18.5523 8.44772 19 9 19C9.55228 19 10 18.5523 10 18C10 17.4477 9.55228 17 9 17C8.44772 17 8 17.4477 8 18Z"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                  <path
-                    d="M14 12C14 12.5523 14.4477 13 15 13C15.5523 13 16 12.5523 16 12C16 11.4477 15.5523 11 15 11C14.4477 11 14 11.4477 14 12Z"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                  <path
-                    d="M8 12C8 12.5523 8.44772 13 9 13C9.55228 13 10 12.5523 10 12C10 11.4477 9.55228 11 9 11C8.44772 11 8 11.4477 8 12Z"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                  <path
-                    d="M14 6C14 6.55228 14.4477 7 15 7C15.5523 7 16 6.55228 16 6C16 5.44772 15.5523 5 15 5C14.4477 5 14 5.44772 14 6Z"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                  <path
-                    d="M8 6C8 6.55228 8.44772 7 9 7C9.55228 7 10 6.55228 10 6C10 5.44772 9.55228 5 9 5C8.44772 5 8 5.44772 8 6Z"
+                    d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   ></path>
                 </g>
-              </g>
-            </g>
-          </svg>
-        </button>
-        <button
-          (click)="removeField(item.elementId)"
-          class="h-8 w-8 border border-slate-200 group hover:bg-red-500 transition-all duration-200 rounded-md hover:shadow-lg"
-        >
-          <svg
-            class="stroke-slate-700 px-1 group-hover:stroke-white"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </g>
-          </svg>
-        </button>
+              </svg>
+            </button>
+          </div>
+        </div>
+        }
       </div>
     </div>
-    } }
+
+    }
   </div>
 </div>
 

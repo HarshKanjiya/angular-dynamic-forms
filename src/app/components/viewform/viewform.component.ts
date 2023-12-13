@@ -24,6 +24,7 @@ export class ViewformComponent {
   base64Images: any = {}
 
 
+  optionalDataBooleans: any = {}
 
 
 
@@ -34,7 +35,7 @@ export class ViewformComponent {
 
 
       res.JsonData.map((field: any) => {
-        // console.log('field :>> ', field);
+        console.log('field :>> ', field);
 
         switch (field.category) {
 
@@ -56,11 +57,17 @@ export class ViewformComponent {
           case "file upload":
             this.formData[`file ${field.elementId}`] = ""
             break
+          case "optional":
+            this.optionalDataBooleans[field.elementId] = false
+            this.formData[`optional ${field.elementId}`] = ""
+            break
           default:
             console.log("Invalid entry!");
         }
       })
+      console.log('optio :>> ', this.formData, this.optionalDataBooleans);
     })
+
   }
 
 
@@ -123,7 +130,13 @@ export class ViewformComponent {
     }
   }
 
+  optionalDataBooleansChangeHandler(id: any, value: any) {
+    this.optionalDataBooleans[id] = value
+    console.log('object :>> ', this.optionalDataBooleans);
+  }
+
   submitForm(data: any) {
+
 
     for (let key in this.formData) {
       if (this.formData.hasOwnProperty(key)) {
@@ -140,6 +153,8 @@ export class ViewformComponent {
         this.formData[key] = this.base64Images[key]
       }
     }
+
+    console.log('form :>> ', this.formData);
 
     this.httpService.postData("responses", this.formData).subscribe((res) => {
       console.log('res :>> ', res);
