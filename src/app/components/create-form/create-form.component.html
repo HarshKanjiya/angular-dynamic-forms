@@ -858,41 +858,6 @@
           placeholder="Placeholder"
           required
         />
-
-        <!-- <div class="flex gap-3 items-center justify-between">
-          <p>Required</p>
-          <div class="flex gap-3 items-center">
-            <div class="flex items-center">
-              <input
-                [(ngModel)]="required"
-                id="default-radio-1"
-                type="radio"
-                value="{{ true }}"
-                name="default-radio"
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
-              />
-              <label for="default-radio-1" class="ms-2 text-sm text-gray-900"
-                >True</label
-              >
-            </div>
-            <div class="flex items-center">
-              <input
-                [(ngModel)]="required"
-                checked
-                id="default-radio-2"
-                type="radio"
-                [defaultChecked]
-                [defaultValue]
-                value="{{ false }}"
-                name="default-radio"
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
-              />
-              <label for="default-radio-2" class="ms-2 text-sm text-gray-900"
-                >False</label
-              >
-            </div>
-          </div>
-        </div> -->
       </div>
 
       <div class="mt-5 flex justify-end">
@@ -933,7 +898,385 @@
         </button>
       </div>
     </div>
-    } }
+    } @case ("conditional") {
+    <!-- <div> -->
+    <!-- <div class="flex flex-col gap-3 pt-3 w-full">
+        <div class="flex gap-3 items-center w-full">
+          <input
+            [(ngModel)]="conditionalInputString"
+            type="text"
+            id="last_name"
+            class="px-2.5 py-2 w-full bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+            placeholder="Conditions"
+            required
+          />
+          <button
+            (click)="addConditionalConditions()"
+            class="h-9 w-9 bg-blue-500 hover:bg-slate-800 transition-all duration-200 group group-hover:bg-red-500 p-1 rounded-md"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="Edit / Add_Plus">
+                  <path
+                    id="Vector"
+                    d="M6 12H12M12 12H18M12 12V18M12 12V6"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1.5 py-2 items-center w-full">
+        @for (item of conditionalInputsArray; track $index) {
+        <div class="flex items-center gap-1 justify-between w-full">
+          <p>{{ item.text }}</p>
+          <button
+            class="w-8 h-8 p-1"
+            (click)="removeConditionalConditions(item.id)"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
+                  stroke="#212121"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+          </button>
+        </div>
+        }
+      </div>
+
+      <div class="flex flex-col gap-1.5 py-2 items-center w-full"></div>
+
+      <div class="mt-5 flex justify-end">
+        <button
+          (click)="addOptionalBody()"
+          pButton
+          pRipple
+          class="px-3 py-2 border flex gap-2 items-center border-slate-300 hover:bg-blue-500 hover:text-white group"
+        >
+          <div class="h-6 w-6">
+            <svg
+              class="group-hover:stroke-white stroke-black"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>
+                <path
+                  d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <p>Add Field</p>
+        </button>
+      </div>
+    </div> -->
+    <div>
+      <div class="flex flex-col gap-3 pt-3">
+        <input
+          [(ngModel)]="labelString"
+          type="text"
+          id="last_name"
+          class="px-2.5 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          placeholder="Label"
+          required
+        />
+        <div class="flex gap-3 items-center">
+          <input
+            [(ngModel)]="optionsTempString"
+            type="text"
+            id="last_name"
+            class="px-2.5 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+            placeholder="option"
+            required
+          />
+          <input
+            [(ngModel)]="OptionTempValueString"
+            type="text"
+            id="last_name"
+            class="px-2.5 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+            placeholder="value"
+            required
+          />
+          <button
+            (click)="addOptions()"
+            class="h-9 w-9 bg-blue-500 hover:bg-slate-800 transition-all duration-200 group group-hover:bg-red-500 p-1 rounded-md"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="Edit / Add_Plus">
+                  <path
+                    id="Vector"
+                    d="M6 12H12M12 12H18M12 12V18M12 12V6"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex flex-col gap-1.5 items-center w-full">
+          @for (item of multiChoiceOptions; track $index) {
+          <div class="flex items-center gap-1 justify-between w-full">
+            <p>{{ item.text }}</p>
+            <button class="w-8 h-8 p-1" (click)="removeOptions(item.optionId)">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
+                    stroke="#212121"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </g>
+              </svg>
+            </button>
+          </div>
+          }
+        </div>
+
+        <div class="flex gap-3 items-center justify-between">
+          <p>Required</p>
+          <div class="flex gap-3 items-center">
+            <div class="flex items-center">
+              <input
+                [(ngModel)]="required"
+                id="default-radio-1"
+                type="radio"
+                value="true"
+                name="default-radio"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+              />
+              <label for="default-radio-1" class="ms-2 text-sm text-gray-900"
+                >True</label
+              >
+            </div>
+            <div class="flex items-center">
+              <input
+                [(ngModel)]="required"
+                checked
+                id="default-radio-2"
+                type="radio"
+                value="false"
+                name="default-radio"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
+              />
+              <label for="default-radio-2" class="ms-2 text-sm text-gray-900"
+                >False</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      @if (multiChoiceOptions.length !== 0) {
+      <div class="flex flex-col gap-2 pt-3">
+        <h2>Add Conditional Field Data</h2>
+        <input
+          [(ngModel)]="conditionalInputLabelString"
+          type="text"
+          id="last_name"
+          class="px-2.5 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          placeholder="Question Label"
+          required
+        />
+        <input
+          [(ngModel)]="conditionalInputPlaceholderValue"
+          type="text"
+          id="last_name"
+          class="px-2.5 py-2 bg-gray-50 border outline-slate-500 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          placeholder="Question Placeholder"
+          required
+        />
+        <div class="flex gap-2 justify-between">
+          <div class="flex gap-2 items-center">
+            <p>for :</p>
+            <select (change)="conditionalQuestionsOptionHelper($event.target)">
+              <option [defaultSelected]></option>
+              @for (item of multiChoiceOptions; track $index) {
+              <option value="{{ item.optionValue }}">{{ item.text }}</option>
+              }
+            </select>
+          </div>
+          <button
+            (click)="addConditionalQuestion()"
+            class="flex text-white px-2 overflow-hidden gap-2 items-center bg-blue-500 hover:bg-slate-800 transition-all duration-200 group group-hover:bg-red-500 p-1 rounded-md"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="Edit / Add_Plus">
+                  <path
+                    id="Vector"
+                    d="M6 12H12M12 12H18M12 12V18M12 12V6"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+            <p>Add Question</p>
+          </button>
+        </div>
+
+        <div class="flex flex-col gap-1.5 items-center w-full">
+          @for (item of conditionalInputsQuestionArray; track $index) {
+          <div class="flex items-center gap-1 justify-between w-full">
+            <p>{{ item.label }} for {{ item.condition }}</p>
+            <button
+              class="w-8 h-8 p-1"
+              (click)="removeConditionalQuestion(item.id)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
+                    stroke="#212121"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </g>
+              </svg>
+            </button>
+          </div>
+          }
+        </div>
+      </div>
+      }
+
+      <div class="mt-5 flex justify-end">
+        <button
+          (click)="addConditionalBody()"
+          pButton
+          pRipple
+          class="px-3 py-2 border flex gap-2 items-center border-slate-300 hover:bg-blue-500 hover:text-white group"
+        >
+          <div class="h-6 w-6">
+            <svg
+              class="group-hover:stroke-white stroke-black"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>
+                <path
+                  d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <p>Add Field</p>
+        </button>
+      </div>
+    </div>
+
+    }}
   </div>
 </div>
 

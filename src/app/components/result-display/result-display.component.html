@@ -83,6 +83,15 @@
     }
   </div>
   }
+  <!--  -->
+  @if( data.conditional.length > 0 ){
+  <div>
+    <label>Optional response:</label>
+    @for (item of data.conditional; track $index) {
+    <p>{{ $index + 1 }} : {{ item }}</p>
+    }
+  </div>
+  }
 </div>
 
 }

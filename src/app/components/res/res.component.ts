@@ -37,6 +37,7 @@ export class ResComponent {
 
       this.rawJson = rawRes
 
+      console.log('rawRes :>> ', rawRes);
       this.store.dispatch(addResponseAction({ data: rawRes }))
 
     })
@@ -62,6 +63,7 @@ export class ResComponent {
     let date = []
     let file = []
     let optional = []
+    let conditional = []
 
     for (let key in temp) {
       if (temp.hasOwnProperty(key)) {
@@ -88,6 +90,9 @@ export class ResComponent {
           case "optional":
             optional.push(temp[key])
             break
+          case "conditional":
+            conditional.push(temp[key])
+            break
           default:
             break
         }
@@ -97,7 +102,7 @@ export class ResComponent {
     }
     this.currentRes = {
       id: temp.id,
-      text, checkbox, radio, textarea, date, file, optional
+      text, checkbox, radio, textarea, date, file, optional, conditional
     }
     console.log(' :>> ', this.currentRes);
 

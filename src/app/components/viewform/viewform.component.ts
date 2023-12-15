@@ -31,11 +31,11 @@ export class ViewformComponent {
   constructor(private store: Store<any>, private httpService: HttpService) {
     this.store.select("form").subscribe((res: any) => {
       this.JsonForm = res.JsonData
-      // console.log('res :>> ', this.JsonForm)
+      // console.log('res :>> ', this)
 
 
       res.JsonData.map((field: any) => {
-        console.log('field :>> ', field);
+        // console.log('field :>> ', field);
 
         switch (field.category) {
 
@@ -61,37 +61,52 @@ export class ViewformComponent {
             this.optionalDataBooleans[field.elementId] = false
             this.formData[`optional ${field.elementId}`] = ""
             break
+          case "conditional":
+            console.log('field :>> ', field);
+
+            field.questions.map((que: any) => {
+              this.formData[`conditional input ${que.id}`] = ""
+
+            })
+
+            // for (let key in field) {
+            //   if (this.formData.hasOwnProperty(key)) {
+
+            //     console.log('key :>> ', key);
+            //     // if (key.toString().split(" ")[0] !== "multi") {
+
+            //     // }
+            //   }
+            // }
+            break
           default:
             console.log("Invalid entry!");
         }
       })
-      console.log('optio :>> ', this.formData, this.optionalDataBooleans);
+      // console.log('optio :>> ', this.formData, this.optionalDataBooleans);
     })
 
   }
 
 
-  optionChangeHelper(elementId: any, optionId: any, checked: boolean) {
+  optionChangeHelper(elementId: any, optionId: any, checked: boolean, target: any) {
 
-    let options = this.JsonForm[elementId].options
+
+    console.log('target.value :>> ', target.value);
+
     let selection: any[] = [...this.formData[`multi ${elementId}`]]
 
+    console.log('selectiopn :>> ', selection);
     if (checked) {
-      options.forEach((ele: any) => {
-        if (ele.optionId === optionId) {
-          selection.push(ele.optionValue)
-        }
-      });
+
+      selection.push(target.value)
 
       this.formData[`multi ${elementId}`] = selection
     }
     else {
-      options.forEach((ele: any) => {
-        if (ele.optionId === optionId) {
-          selection = selection.filter(item => item !== ele.optionValue);
-        }
-      });
 
+
+      selection = selection.filter(item => item !== target.value);
 
       this.formData[`multi ${elementId}`] = selection
     }
@@ -99,18 +114,6 @@ export class ViewformComponent {
   }
 
 
-
-
-
-
-
-  // uploadImage(image: File): Observable<Response> {
-  //   const formData = new FormData();
-
-  //   formData.append('image', image);
-
-  //   return this.http.post('/api/v1/image-upload', formData);
-  // }
 
   handleImageUpload(event: any, elementId: any): void {
     const input = event.target;
@@ -133,6 +136,14 @@ export class ViewformComponent {
   optionalDataBooleansChangeHandler(id: any, value: any) {
     this.optionalDataBooleans[id] = value
     console.log('object :>> ', this.optionalDataBooleans);
+  }
+
+
+  selectedCondition: any = {}
+  conditionalChangeHandler(fieldId: any, target: any) {
+
+    this.selectedCondition[fieldId] = target.value
+    console.log('id :>> ', this.selectedCondition);
   }
 
   submitForm(data: any) {

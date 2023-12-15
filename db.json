@@ -2,7 +2,10 @@
   "responses": [
     {
       "input 0": "harsh",
-      "multi 1": ["b", "a"],
+      "multi 1": [
+        "b",
+        "a"
+      ],
       "radio button 2": "male",
       "textarea 3": "text area",
       "date 4": "2023-12-23",
@@ -11,7 +14,9 @@
     },
     {
       "input 0": "res 2",
-      "multi 1": ["c"],
+      "multi 1": [
+        "c"
+      ],
       "radio button 2": "female",
       "textarea 3": "tettttttttxt",
       "date 4": "2023-12-29",
@@ -20,7 +25,9 @@
     },
     {
       "input 0": "fdfdfd",
-      "multi 1": ["b"],
+      "multi 1": [
+        "b"
+      ],
       "radio button 2": "male",
       "textarea 3": "dfdfd",
       "date 4": "2023-12-21",
@@ -41,6 +48,26 @@
       "input 20": "vfdvfgfgfg",
       "optional 22": "gfgfgfgfg",
       "id": 6
+    },
+    {
+      "input 22": "",
+      "file 27": "",
+      "textarea 25": "",
+      "multi 23": [],
+      "radio button 24": "",
+      "date 26": "",
+      "optional 28": "awewe",
+      "id": 7
+    },
+    {
+      "input 22": "",
+      "file 27": "",
+      "textarea 25": "",
+      "multi 23": [],
+      "radio button 24": "",
+      "date 26": "",
+      "conditional input 20": "dsdsdsd",
+      "id": 8
     }
   ],
   "forms": [
@@ -483,6 +510,360 @@
         }
       ],
       "id": 5
+    },
+    {
+      "data": [
+        {
+          "elementId": 22,
+          "label": "Your Name?",
+          "placeholder": "harsh",
+          "required": "true",
+          "category": "Text",
+          "type": "text"
+        },
+        {
+          "elementId": 27,
+          "label": "profile pic",
+          "required": false,
+          "accept": "image/png",
+          "category": "file upload"
+        },
+        {
+          "elementId": 25,
+          "label": "Details",
+          "placeholder": "data",
+          "required": "false",
+          "category": "Textarea"
+        },
+        {
+          "options": [
+            {
+              "optionId": 100,
+              "optionValue": "react",
+              "text": "ReactJS"
+            },
+            {
+              "optionId": 101,
+              "optionValue": "ang",
+              "text": "Angular"
+            },
+            {
+              "optionId": 102,
+              "optionValue": "svt",
+              "text": "Svelt"
+            },
+            {
+              "optionId": 103,
+              "optionValue": "next",
+              "text": "NextJS"
+            }
+          ],
+          "elementId": 23,
+          "label": "which Library do you use?",
+          "required": false,
+          "category": "Multiple Choice"
+        },
+        {
+          "options": [
+            {
+              "optionId": 105,
+              "optionValue": "m",
+              "text": "male"
+            },
+            {
+              "optionId": 106,
+              "optionValue": "f",
+              "text": "female"
+            }
+          ],
+          "elementId": 24,
+          "label": "Gender",
+          "required": "false",
+          "category": "Radio Button"
+        },
+        {
+          "elementId": 26,
+          "label": "Birth date",
+          "required": "false",
+          "minDate": "2023-12-01",
+          "maxDate": "2023-12-31",
+          "category": "date"
+        },
+        {
+          "elementId": 28,
+          "label": "middle name",
+          "placeholder": "kanjiya",
+          "required": false,
+          "category": "optional"
+        },
+        {
+          "elementId": 20,
+          "label": "optional; 2",
+          "placeholder": "wqwqwwq",
+          "required": false,
+          "category": "optional"
+        }
+      ],
+      "id": 6
+    },
+    {
+      "data": [
+        {
+          "elementId": 22,
+          "label": "Your Name?",
+          "placeholder": "harsh",
+          "required": "true",
+          "category": "Text",
+          "type": "text"
+        },
+        {
+          "elementId": 27,
+          "label": "profile pic",
+          "required": false,
+          "accept": "image/png",
+          "category": "file upload"
+        },
+        {
+          "elementId": 25,
+          "label": "Details",
+          "placeholder": "data",
+          "required": "false",
+          "category": "Textarea"
+        },
+        {
+          "options": [
+            {
+              "optionId": 100,
+              "optionValue": "react",
+              "text": "ReactJS"
+            },
+            {
+              "optionId": 101,
+              "optionValue": "ang",
+              "text": "Angular"
+            },
+            {
+              "optionId": 102,
+              "optionValue": "svt",
+              "text": "Svelt"
+            },
+            {
+              "optionId": 103,
+              "optionValue": "next",
+              "text": "NextJS"
+            }
+          ],
+          "elementId": 23,
+          "label": "which Library do you use?",
+          "required": false,
+          "category": "Multiple Choice"
+        },
+        {
+          "options": [
+            {
+              "optionId": 105,
+              "optionValue": "m",
+              "text": "male"
+            },
+            {
+              "optionId": 106,
+              "optionValue": "f",
+              "text": "female"
+            }
+          ],
+          "elementId": 24,
+          "label": "Gender",
+          "required": "false",
+          "category": "Radio Button"
+        },
+        {
+          "elementId": 26,
+          "label": "Birth date",
+          "required": "false",
+          "minDate": "2023-12-01",
+          "maxDate": "2023-12-31",
+          "category": "date"
+        },
+        {
+          "elementId": 28,
+          "label": "middle name",
+          "placeholder": "kanjiya",
+          "required": false,
+          "category": "optional"
+        },
+        {
+          "id": 23,
+          "label": "countries",
+          "conditions": [
+            {
+              "text": "bharat",
+              "optionValue": "in",
+              "optionId": 236
+            },
+            {
+              "text": "america",
+              "optionValue": "usa",
+              "optionId": 234
+            },
+            {
+              "optionId": 100,
+              "optionValue": "br",
+              "text": "brazil"
+            }
+          ],
+          "questions": [
+            {
+              "id": 20,
+              "condition": "in",
+              "label": "arjit",
+              "placeholder": "singh"
+            },
+            {
+              "id": 21,
+              "condition": "br",
+              "label": "sakira",
+              "placeholder": "sakira sakira"
+            },
+            {
+              "id": 22,
+              "condition": "usa",
+              "label": "tailer",
+              "placeholder": "shift"
+            }
+          ]
+        }
+      ],
+      "id": 7
+    },
+    {
+      "data": [
+        {
+          "elementId": 22,
+          "label": "Your Name?",
+          "placeholder": "harsh",
+          "required": "true",
+          "category": "Text",
+          "type": "text"
+        },
+        {
+          "elementId": 27,
+          "label": "profile pic",
+          "required": false,
+          "accept": "image/png",
+          "category": "file upload"
+        },
+        {
+          "elementId": 25,
+          "label": "Details",
+          "placeholder": "data",
+          "required": "false",
+          "category": "Textarea"
+        },
+        {
+          "options": [
+            {
+              "optionId": 100,
+              "optionValue": "react",
+              "text": "ReactJS"
+            },
+            {
+              "optionId": 101,
+              "optionValue": "ang",
+              "text": "Angular"
+            },
+            {
+              "optionId": 102,
+              "optionValue": "svt",
+              "text": "Svelt"
+            },
+            {
+              "optionId": 103,
+              "optionValue": "next",
+              "text": "NextJS"
+            }
+          ],
+          "elementId": 23,
+          "label": "which Library do you use?",
+          "required": false,
+          "category": "Multiple Choice"
+        },
+        {
+          "options": [
+            {
+              "optionId": 105,
+              "optionValue": "m",
+              "text": "male"
+            },
+            {
+              "optionId": 106,
+              "optionValue": "f",
+              "text": "female"
+            }
+          ],
+          "elementId": 24,
+          "label": "Gender",
+          "required": "false",
+          "category": "Radio Button"
+        },
+        {
+          "elementId": 26,
+          "label": "Birth date",
+          "required": "false",
+          "minDate": "2023-12-01",
+          "maxDate": "2023-12-31",
+          "category": "date"
+        },
+        {
+          "elementId": 28,
+          "label": "middle name",
+          "placeholder": "kanjiya",
+          "required": false,
+          "category": "optional"
+        },
+        {
+          "id": 23,
+          "label": "countries",
+          "conditions": [
+            {
+              "text": "bharat",
+              "optionValue": "in",
+              "optionId": 236
+            },
+            {
+              "text": "america",
+              "optionValue": "usa",
+              "optionId": 234
+            },
+            {
+              "optionId": 100,
+              "optionValue": "br",
+              "text": "brazil"
+            }
+          ],
+          "questions": [
+            {
+              "id": 20,
+              "condition": "in",
+              "label": "arjit",
+              "placeholder": "singh"
+            },
+            {
+              "id": 21,
+              "condition": "br",
+              "label": "sakira",
+              "placeholder": "sakira sakira"
+            },
+            {
+              "id": 22,
+              "condition": "usa",
+              "label": "tailer",
+              "placeholder": "shift"
+            }
+          ],
+          "category": "conditional"
+        }
+      ],
+      "id": 8
     }
   ]
 }

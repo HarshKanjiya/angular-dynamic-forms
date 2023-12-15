@@ -1,3 +1,4 @@
+import { CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, CdkDropListGroup } from "@angular/cdk/drag-drop";
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -6,9 +7,8 @@ import { Store } from '@ngrx/store';
 import Toast from 'awesome-toast-component';
 import { ButtonModule } from 'primeng/button';
 import { Overlay } from 'primeng/overlay';
-import { addFormAction } from '../../reducers/formReducer';
 import { HttpService } from '../../services/http-service.service';
-import { moveItemInArray, CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, CdkDropListGroup } from "@angular/cdk/drag-drop"
+import { addFormAction } from "../../reducers/formReducer";
 
 @Component({
   selector: 'app-create-form',
@@ -24,13 +24,15 @@ export class CreateFormComponent {
   constructor(private store: Store<any>, private httpService: HttpService) {
     store.select((state) => state.form.JsonData).subscribe(res => {
       this.jsonData = res
+      console.log('json :>> ', res);
     })
+
   }
 
   jsonData: any[] = []
 
-  availableInputs = ["Text", "Multiple Choice", "Radio Button", "Textarea", "date", "file upload", "optional"]
-  selectedInput: string = "Text"
+  availableInputs = ["Text", "Multiple Choice", "Radio Button", "Textarea", "date", "file upload", "optional", "conditional"]
+  selectedInput: string = "conditional"
 
   temp: any = {};
   counter: number = 20
@@ -48,7 +50,9 @@ export class CreateFormComponent {
   typeOfInput = ["text", "password", "number"]
 
 
-  multiChoiceOptions: any[] = []
+  multiChoiceOptions: any[] =
+    [{ text: "bharat", optionValue: "in", optionId: 236 },
+    { text: "america", optionValue: "usa", optionId: 234 },]
 
   minDate: string = "";
   maxDate: string = "";
@@ -56,9 +60,54 @@ export class CreateFormComponent {
   selectedFileType: string = "image/png"
 
 
+  conditionalInputsArray: any = [
+
+  ]
+
+  conditionalInputLabelString: string = ""
+  conditionalInputPlaceholderValue: string = ""
+  conditionalInputSelectedField: string = ""
+  conditionalInputsQuestionArray: any = []
+
+  conditionalQuestionsOptionHelper(x: any) {
+    this.conditionalInputSelectedField = x.value
+
+  }
+
+  addConditionalQuestion() {
+    this.conditionalInputsQuestionArray.push({
+      id: this.counter,
+      condition: this.conditionalInputSelectedField,
+      label: this.conditionalInputLabelString,
+      placeholder: this.conditionalInputPlaceholderValue
+    })
+
+    this.counter += 1
+    this.conditionalInputPlaceholderValue = ""
+    this.conditionalInputLabelString = ""
+
+  }
+
+  removeConditionalQuestion(id: any) {
+    this.conditionalInputsQuestionArray = this.conditionalInputsQuestionArray.filter((item: any) => (item.id !== id))
+
+  }
+  addConditionalBody() {
+    let _temp = {
+      id: this.counter,
+      label: this.labelString,
+      conditions: this.multiChoiceOptions,
+      questions: this.conditionalInputsQuestionArray,
+      "category": this.selectedInput
+
+    }
+
+    this.jsonData = [...this.jsonData, _temp]
+  }
+
 
   addInputType() {
-    this.multiChoiceOptions = []
+    // this.multiChoiceOptions = []
     this.temp["category"] = this.selectedInput
 
   }
@@ -95,6 +144,7 @@ export class CreateFormComponent {
 
 
       if (this.optionsTempString.trim() === "") return
+
       let temp = {
         optionId: this.OptionsCounter,
         optionValue: this.OptionTempValueString,
@@ -102,6 +152,7 @@ export class CreateFormComponent {
       }
       this.multiChoiceOptions.push(temp)
       this.optionsTempString = ""
+      this.OptionTempValueString = ""
 
       this.OptionsCounter += 1
     } else {
@@ -241,8 +292,6 @@ export class CreateFormComponent {
 
   drop(event: CdkDragDrop<any[]>) {
     console.log('drop :>> ', event);
-    // moveItemInArray(this.jsonData, event.previousIndex, event.currentIndex)
-
 
     let _temp = [...this.jsonData]
 
@@ -256,6 +305,7 @@ export class CreateFormComponent {
 
 
   saveForm() {
+    console.log('form :>> ', this.jsonData);
     this.httpService.postData("forms", { "data": this.jsonData }).subscribe(res => {
       console.log('res :>> ', res);
     })

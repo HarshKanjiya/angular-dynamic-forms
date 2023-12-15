@@ -109,9 +109,14 @@
             ngModel
             #iddd
             (change)="
-              optionChangeHelper(item.elementId, option.optionId, iddd.checked)
+              optionChangeHelper(
+                item.elementId,
+                option.optionId,
+                iddd.checked,
+                $event.target
+              )
             "
-            value="{{ option.value }}"
+            value="{{ option.optionValue }}"
             name="multi {{ item.elementId }}"
             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
           />
@@ -246,6 +251,38 @@
           />
         </div>
         }
+      </div>
+      }@case("conditional"){
+      <div class="flex py-2 flex-col gap-3">
+        <div>
+          <p>{{ item.label }}</p>
+          @for (condition of item.conditions; track $index) {
+          <div>
+            <input
+              type="radio"
+              name="conditions {{ item.id }}"
+              value="{{ condition.optionValue }}"
+              (change)="conditionalChangeHandler(item.id, $event.target)"
+            />
+            <label> {{ condition.text }} </label>
+          </div>
+          }
+        </div>
+
+        @for (x of item.questions; track $index) {
+        @if(selectedCondition[item.id] === x.condition) {
+        <div class="relative py-2">
+          <label class="text-xs absolute -top-1.5 left-2 bg-white px-3">
+            {{ x.label }}
+          </label>
+          <input
+            ngModel
+            name="conditional input {{ x.id }}"
+            class="px-2.5 pl-4 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+            placeholder="{{ x.placeholder }}"
+          />
+        </div>
+        } }
       </div>
       }
 
