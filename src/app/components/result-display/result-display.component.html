@@ -69,7 +69,13 @@
   <div>
     <label>file response:</label>
     @for (item of data.file; track $index) {
-    <div>{{ $index + 1 }} : <img src="{{ item }}" class="h-28 w-28" /></div>
+    <div>
+      @if(item.includes("image")){
+      <img src="{{ item }}" class="h-28 w-28" />
+      }@else if(item.includes("application")) {
+      <a href="{{ item }}" download="">download</a>
+      }
+    </div>
     }
   </div>
   }

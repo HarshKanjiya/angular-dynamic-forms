@@ -11,6 +11,9 @@ export class ResultDisplayComponent {
   @Input() data: any;
 
 
+  type: any;
+
+
 
 
 }

@@ -9,13 +9,26 @@ import { ButtonModule } from 'primeng/button';
 import { Overlay } from 'primeng/overlay';
 import { HttpService } from '../../services/http-service.service';
 import { addFormAction } from "../../reducers/formReducer";
+import { animate, style, transition, trigger } from "@angular/animations";
+
+
+export const fadeInOut = trigger('fadeInOut', [
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate('300ms', style({ opacity: 1 })),
+  ]),
+  transition(':leave', [
+    animate('300ms', style({ opacity: 0 })),
+  ]),
+]);
+
 
 @Component({
   selector: 'app-create-form',
   standalone: true,
   imports: [ButtonModule, CdkDrag, CdkDragHandle, CdkDropList, CdkDropListGroup, FormsModule, RouterLink, HttpClientModule],
   templateUrl: './create-form.component.html',
-  animations: [Overlay]
+  animations: [Overlay, fadeInOut]
 
 })
 export class CreateFormComponent {
